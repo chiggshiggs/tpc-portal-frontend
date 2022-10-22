@@ -10,6 +10,7 @@
   padding-right: 40px;
   overflow-x: scroll;
   overflow-y: scroll;
+  padding-bottom: 40px;
 }
 
 @media screen and (max-width: 767px) {

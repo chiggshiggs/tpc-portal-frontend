@@ -27,7 +27,7 @@ function Nav({ children, sideNavOptions }) {
   const NavContent = () => (
     <Fragment>
       <div
-        className={`w-[65vw] md:w-[250px] h-[94vh] m-5 p-10 font-bold bg-white ${styles.SideNavContainer} flex flex-col justify-between`}
+        className={`w-[65vw] md:w-[250px] h-[95vh] m-5 mb-10 p-10 font-bold bg-white ${styles.SideNavContainer} flex flex-col justify-between`}
       >
         <div>
           <div className="mb-2">
