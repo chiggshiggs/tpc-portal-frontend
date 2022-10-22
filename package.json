@@ -9,12 +9,28 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.12",
+    "@material-tailwind/react": "^1.2.4",
+    "@mui/icons-material": "^5.10.9",
+    "@reduxjs/toolkit": "^1.8.6",
+    "daisyui": "^2.33.0",
+    "flowbite": "^1.5.3",
+    "flowbite-react": "^0.2.1",
+    "install": "^0.13.0",
     "next": "12.3.1",
+    "next-pwa": "^5.6.0",
+    "npm": "^8.19.2",
+    "preline": "^1.2.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-redux": "^8.0.4",
+    "utils": "link:@mui/material/utils"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.12",
     "eslint": "8.25.0",
-    "eslint-config-next": "12.3.1"
+    "eslint-config-next": "12.3.1",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.2.1"
   }
 }
