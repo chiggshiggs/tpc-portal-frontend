@@ -67,7 +67,7 @@ function Nav({ children, sideNavOptions }) {
   const Slate = () => (
     <div className="pl-10">
       <div
-        className={`mt-10 h-[4vw] flex flex-row justify-between items-center pr-10 pb-3`}
+        className={`mt-10 flex flex-row justify-between items-center pr-10 pb-3`}
       >
         <Breadcrumbs className=" ml-5 md:ml-0">
           <a href="#" className="opacity-60">
