@@ -4,6 +4,17 @@ export const NAV = [
     to: "/home",
     subOptions: [],
   },
+    {
+    label: "Students",
+    to: "students",
+    subOptions: [
+      {
+        label: "All Students",
+        to: "/students/all",
+        subOptions: [],
+      },
+    ],
+  },
   {
     // Forum -> Venue Portal + Scheduling Portal + Shortlist Portal
     label: "Forum",
@@ -26,15 +37,5 @@ export const NAV = [
       },
     ],
   },
-  {
-    label: "Students",
-    to: "students",
-    subOptions: [
-      {
-        label: "All Students",
-        to: "/students/all",
-        subOptions: [],
-      },
-    ],
-  },
+
 ];
