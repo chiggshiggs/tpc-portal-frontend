@@ -69,10 +69,13 @@ export interface FileInput {
   initialValue?: File | Array<File>;
 }
 
+// -------------------- Radio ----------------- //
+
 export interface RadioInput {
   label: String;
   key: String;
   type: FormInputType.RADIO;
+  options: Array<Option>;
   required?: Boolean;
   validation?: Validation;
   visible?: Visible;
@@ -82,17 +85,27 @@ export interface RadioInput {
   initialValue?: String | number;
 }
 
+//  -------------- Checkbox -----------------//
+
 export interface CheckboxInput {
   label: String;
   key: String;
   type: FormInputType.CHECKBOX;
+  options: Array<Option>;
   required?: Boolean;
   validation?: Validation;
   visible?: Visible;
   placeHolder?: String;
   id?: String;
   description?: String;
-  initialValue?: Array<String | Number>;
+  initialValue?: Array<String> | Array<Number>;
+}
+
+export interface Option {
+  label: String;
+  key: String;
+  value?: Array<String>;
+  description?: String;
 }
 
 export type FormElement =

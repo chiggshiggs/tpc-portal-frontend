@@ -13,6 +13,7 @@ import {
 import { FormBuilder, RepeatableSection, Section } from "../../types/Form";
 import { FormType, FormElement, FormInputType } from "../../types/FormType";
 import { Button, Typography } from "../components";
+import CheckboxInput from "./input/Checkbox";
 
 // Components
 const ShortText = dynamic(import("./input/ShortText"));
@@ -35,7 +36,7 @@ function Renderer({
   initialSchema: FormBuilder;
 }): React.ReactElement {
   const dispatch = useDispatch();
-
+  console.log(renderElement);
   const addRepeatingSection = () => {
     dispatch(
       updateRepeatingSection({
@@ -111,9 +112,7 @@ function Renderer({
                 repeatingSectionIndex: number
               ): React.ReactElement => {
                 return (
-                  <div
-                    key={`${basePath}-${repeatingSectionIndex}`}
-                  >
+                  <div key={`${basePath}-${repeatingSectionIndex}`}>
                     <div className="flex justify-between align-middle">
                       <Typography order={3}>
                         {renderElement.title} {repeatingSectionIndex + 1}
@@ -192,6 +191,16 @@ function Renderer({
             formElement={renderElement}
             basePath={`${basePath}[${renderElement.key}]`}
             formKey={formKey}
+            formBuilderSchema={formBuilderSchema}
+          />
+        );
+
+      case FormInputType.CHECKBOX:
+        return (
+          <CheckboxInput
+            renderElement={renderElement}
+            formKey={formKey}
+            basePath={`${basePath}[${renderElement.key}]`}
             formBuilderSchema={formBuilderSchema}
           />
         );

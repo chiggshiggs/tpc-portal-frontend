@@ -97,7 +97,6 @@ export const signOutAccount = async () => {
 
 export const getUserStatus = () => {
   // try {
-  console.log(auth);
   return auth.currentUser;
   // } catch (error) {
   //   return false;

@@ -2,8 +2,7 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    runtime: "experimental-edge",
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

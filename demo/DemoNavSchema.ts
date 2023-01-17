@@ -1,4 +1,4 @@
-"use client"
+"use client";
 export {};
 import {
   IconNotes,
@@ -7,7 +7,7 @@ import {
   IconPresentationAnalytics,
   IconFileAnalytics,
   IconAdjustments,
-  IconLock
+  IconLock,
 } from "@tabler/icons";
 const DemoNavSchema = [
   { label: "Dashboard", icon: IconGauge },

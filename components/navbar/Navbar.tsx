@@ -6,6 +6,7 @@ import { LinksGroup } from "./NavbarLinksGroup";
 import { UserButton } from "./UserButton";
 import DemoNavSchema from "../../demo/DemoNavSchema";
 import React from "react";
+import { useSearchParams, usePathname } from "next/navigation";
 
 export interface mockdata {
   label: String;
@@ -46,18 +47,20 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-
-
-
-
 export function NavbarNested({ children }: { children: React.ReactNode }) {
   const { classes } = useStyles();
+  const router = usePathname();
   const links = DemoNavSchema.map((item) => (
-    <LinksGroup {...item} key={item.label} />
+    <LinksGroup
+      initiallyOpened={item.initiallyOpened}
+      links={item.links}
+      icon={item.icon}
+      label={item.label}
+      key={item.label}
+    />
   ));
   return (
-    <div className="flex" >
-  
+    <div className="flex">
       <Navbar className="h-[100vh]" p="xs" width={{ base: 300 }}>
         <Navbar.Section className={classes.header}>
           {/* Header with logo */}
@@ -70,7 +73,6 @@ export function NavbarNested({ children }: { children: React.ReactNode }) {
           </Group>
         </Navbar.Section>
         <Navbar.Section grow className={classes.links} component={ScrollArea}>
-          {/* Links sections */}
           <div className={classes.linksInner}>{links}</div>
         </Navbar.Section>
         <Navbar.Section className={classes.footer}>
@@ -82,7 +84,9 @@ export function NavbarNested({ children }: { children: React.ReactNode }) {
           />
         </Navbar.Section>
       </Navbar>
-      <div className="flex w-full h-[100vh] overflow-scroll p-5">{children}</div>
+      <div className="flex w-full h-[100vh] overflow-scroll p-5">
+        {children}
+      </div>
     </div>
   );
 }

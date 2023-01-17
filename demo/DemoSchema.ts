@@ -105,6 +105,41 @@ const DemoSchema: FormBuilder = {
         },
       },
     },
+    {
+      label: "Preferred Branch",
+      key: "preferredBranch",
+      type: FormInputType.CHECKBOX,
+      description: "Choose your preferred branch",
+      initialValue: ["ece", "cse"],
+      options: [
+        {
+          label: "circuital",
+          key: "circuital",
+          value: ["cse", "mnc", "ece", "eee"],
+        },
+        {
+          label: "CSE",
+          key: "cse",
+        },
+        {
+          label: "MnC",
+          description: "Mathematics and Computing",
+          key: "mnc",
+        },
+        {
+          label: "ECE",
+          key: "ece",
+        },
+        {
+          label: "EEE",
+          key: "eee",
+        },
+        {
+          label: "PHE",
+          key: "phe",
+        },
+      ],
+    },
   ],
 };
 

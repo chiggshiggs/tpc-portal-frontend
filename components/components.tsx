@@ -18,7 +18,12 @@ import {
   ScrollArea,
   Box,
   Collapse,
-  ThemeIcon,Burger,Drawer
+  SimpleGrid,
+  ThemeIcon,
+  Burger,
+  Checkbox,
+  Radio,
+  Drawer,
 } from "@mantine/core";
 
 // Switching to Material Tailwind if Mantine is not good
@@ -28,7 +33,9 @@ import { NavbarNested } from "./navbar/Navbar";
 export {
   TextInput,
   Typography,
+  Checkbox,
   Button,
+  SimpleGrid,
   Input,
   Textarea,
   NumberInput,
@@ -44,7 +51,10 @@ export {
   Box,
   Collapse,
   ThemeIcon,
-  createStyles,Burger,Drawer
+  createStyles,
+  Burger,
+  Drawer,
+  Radio,
 };
 
 export type { UnstyledButtonProps };

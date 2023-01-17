@@ -42,14 +42,28 @@ function useForm({
   // Initialize Key Value and Validation
   useEffect(() => {
     // if (!ReduxFormContext[formKey].keyStore[basePath])
-    dispatch(
-      updateFormStateContext({
-        formKey,
-        stateKey: basePath,
-        value: (formElement.initialValue as string) || ("" as string),
-        formBuilderSchema,
-      })
-    );
+    switch (formElement.type) {
+      case FormInputType.CHECKBOX:
+        dispatch(
+          updateFormStateContext({
+            formKey,
+            stateKey: basePath,
+            value: (formElement.initialValue as string[]) || [],
+            formBuilderSchema,
+          })
+        );
+        break;
+      default:
+        dispatch(
+          updateFormStateContext({
+            formKey,
+            stateKey: basePath,
+            value: (formElement.initialValue as string) || ("" as string),
+            formBuilderSchema,
+          })
+        );
+    }
+
     dispatch(
       updateFormValidationContext({
         formKey,
@@ -153,8 +167,21 @@ function useForm({
     return value;
   };
 
+  const captureCheckboxInputChange = (value: Array<string>): Array<string> => {
+    dispatch(
+      updateFormStateContext({
+        formKey,
+        stateKey: basePath,
+        value,
+        formBuilderSchema,
+      })
+    );
+    return value;
+  };
+
   return {
     inputState: ReduxFormContext[formKey]?.keyStore[basePath],
+    captureCheckboxInputChange,
     captureTextInputChange,
     captureNumberInputChange,
     error,

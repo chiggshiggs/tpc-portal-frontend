@@ -310,7 +310,6 @@ export default class FormService {
 
         default: {
           const newBasePath = `${basePath}[${formState.key}]`;
-          console.log(formState, newBasePath);
           exportableFormData[formState.key as string] = keyStore[newBasePath];
         }
       }
