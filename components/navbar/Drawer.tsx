@@ -98,7 +98,7 @@ export function MobileDrawer({ children }: { children: React.ReactNode }) {
         <MobileNavbarNested />
       </Drawer>
       <div className="p-5">
-        <Group position="left" className="">
+        <Group position="left" className="flex justify-between">
           <Burger
             opened={opened}
             onClick={() => setOpened((o) => !o)}
