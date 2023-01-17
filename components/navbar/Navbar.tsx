@@ -2,12 +2,14 @@
 import { Navbar, Group, Code, ScrollArea, createStyles } from "../components";
 import { TablerIcon } from "@tabler/icons";
 import Logo from "./Logo";
-import { LinksGroup } from "./NavbarLinksGroup";
+
 import { UserButton } from "./UserButton";
 import DemoNavSchema from "../../demo/DemoNavSchema";
 import React from "react";
 import { useSearchParams, usePathname } from "next/navigation";
 import ThemeToggle from "../theme/ThemeToggle";
+import SidebarRenderer from "./SidebarRenderer";
+import { Sidebar } from "../../types/Sidebar.types";
 
 export interface mockdata {
   label: String;
@@ -48,18 +50,16 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function NavbarNested({ children }: { children: React.ReactNode }) {
+export function NavbarNested({
+  schema,
+  children,
+}: {
+  schema: Sidebar;
+  children: React.ReactNode;
+}) {
   const { classes } = useStyles();
   const router = usePathname();
-  const links = DemoNavSchema.map((item) => (
-    <LinksGroup
-      initiallyOpened={item.initiallyOpened}
-      links={item.links}
-      icon={item.icon}
-      label={item.label}
-      key={item.label}
-    />
-  ));
+
   return (
     <div className="flex">
       <Navbar className="h-[100vh]" p="xs" width={{ base: 300 }}>
@@ -74,7 +74,13 @@ export function NavbarNested({ children }: { children: React.ReactNode }) {
           </Group>
         </Navbar.Section>
         <Navbar.Section grow className={classes.links} component={ScrollArea}>
-          <div className={classes.linksInner}>{links}</div>
+          <div className={classes.linksInner}>
+            {DemoNavSchema.elements.map((sidebarElement, index) => (
+              <div key={`Sidebar_${index}`}>
+                <SidebarRenderer element={sidebarElement} />
+              </div>
+            ))}
+          </div>
         </Navbar.Section>
         <Navbar.Section className={classes.footer}>
           {/* Footer with user */}

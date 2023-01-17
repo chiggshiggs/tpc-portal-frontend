@@ -7,6 +7,9 @@ import ReduxProvider from "./redux";
 
 import "./globals.css";
 
+// Demo
+import DemoNavSchema from "../demo/DemoNavSchema";
+
 export const config = {
   runtime: "edge",
 };
@@ -23,12 +26,12 @@ export default function RootLayout({
         <ReduxProvider>
           <RootStyleRegistry>
             <div className="sm:hidden">
-              <MobileDrawer>
+              <MobileDrawer schema={DemoNavSchema}>
                 <div>{children}</div>
               </MobileDrawer>
             </div>
             <div className=" hidden sm:block">
-              <NavbarNested>{children}</NavbarNested>
+              <NavbarNested schema={DemoNavSchema}>{children}</NavbarNested>
             </div>
           </RootStyleRegistry>
         </ReduxProvider>

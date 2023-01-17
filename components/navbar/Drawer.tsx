@@ -5,10 +5,11 @@ import { Navbar } from "../components";
 import { Code, ScrollArea, createStyles } from "../components";
 import { TablerIcon } from "@tabler/icons";
 import Logo from "./Logo";
-import { LinksGroup } from "./NavbarLinksGroup";
+
 import { UserButton } from "./UserButton";
-import DemoNavSchema from "../../demo/DemoNavSchema";
 import ThemeToggle from "../theme/ThemeToggle";
+import SidebarRenderer from "./SidebarRenderer";
+import { Sidebar } from "../../types/Sidebar.types";
 
 export interface mockdata {
   label: String;
@@ -49,11 +50,9 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function MobileNavbarNested() {
+function MobileNavbarNested({ schema }: { schema: Sidebar }) {
   const { classes } = useStyles();
-  const links = DemoNavSchema.map((item) => (
-    <LinksGroup {...item} key={item.label} />
-  ));
+
   return (
     <div className="flex flex-col justify-between h-[95%]">
       <Navbar.Section className={classes.header}>
@@ -68,7 +67,13 @@ function MobileNavbarNested() {
       </Navbar.Section>
       <Navbar.Section grow className={classes.links} component={ScrollArea}>
         {/* Links sections */}
-        <div className={classes.linksInner}>{links}</div>
+        <div className={classes.linksInner}>
+          {schema.elements.map((sidebarElement, index) => (
+            <div key={`Sidebar_${index}`}>
+              <SidebarRenderer element={sidebarElement} />
+            </div>
+          ))}
+        </div>
       </Navbar.Section>
       <Navbar.Section className={classes.footer}>
         {/* Footer with user */}
@@ -82,7 +87,13 @@ function MobileNavbarNested() {
   );
 }
 
-export function MobileDrawer({ children }: { children: React.ReactNode }) {
+export function MobileDrawer({
+  schema,
+  children,
+}: {
+  schema: Sidebar;
+  children: React.ReactNode;
+}) {
   const [opened, setOpened] = useState(false);
   const title = opened ? "close navigation" : "open navigation";
   return (
@@ -94,7 +105,7 @@ export function MobileDrawer({ children }: { children: React.ReactNode }) {
         size="lg"
       >
         {/* Drawer Content */}
-        <MobileNavbarNested />
+        <MobileNavbarNested schema={schema} />
       </Drawer>
       <div className="p-5">
         <Group position="left" className="flex justify-between">
