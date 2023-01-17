@@ -55,7 +55,7 @@ function MobileNavbarNested() {
     <LinksGroup {...item} key={item.label} />
   ));
   return (
-    <div className="flex flex-col justify-between h-[97%]">
+    <div className="flex flex-col justify-between h-[95%]">
       <Navbar.Section className={classes.header}>
         {/* Header with logo */}
         <Group position="apart" className="p-0">
@@ -91,7 +91,6 @@ export function MobileDrawer({ children }: { children: React.ReactNode }) {
         opened={opened}
         onClose={() => setOpened(false)}
         padding="xl"
-        className="h-[100vh]"
         size="lg"
       >
         {/* Drawer Content */}
