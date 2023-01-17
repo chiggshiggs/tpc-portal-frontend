@@ -53,6 +53,22 @@ const DemoSchema: FormBuilder = {
           },
         },
         {
+          label: "Gender",
+          key: "gender",
+          type: FormInputType.RADIO,
+          description: "Choose your gender",
+          options: [
+            {
+              label: "Male",
+              key: "male",
+            },
+            {
+              label: "Female",
+              key: "female",
+            },
+          ],
+        },
+        {
           title: "Schooling",
           key: "school",
           formElements: [

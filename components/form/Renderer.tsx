@@ -14,6 +14,7 @@ import { FormBuilder, RepeatableSection, Section } from "../../types/Form";
 import { FormType, FormElement, FormInputType } from "../../types/FormType";
 import { Button, Typography } from "../components";
 import CheckboxInput from "./input/Checkbox";
+import RadioInput from "./input/RadioInput";
 
 // Components
 const ShortText = dynamic(import("./input/ShortText"));
@@ -198,6 +199,15 @@ function Renderer({
       case FormInputType.CHECKBOX:
         return (
           <CheckboxInput
+            renderElement={renderElement}
+            formKey={formKey}
+            basePath={`${basePath}[${renderElement.key}]`}
+            formBuilderSchema={formBuilderSchema}
+          />
+        );
+      case FormInputType.RADIO:
+        return (
+          <RadioInput
             renderElement={renderElement}
             formKey={formKey}
             basePath={`${basePath}[${renderElement.key}]`}

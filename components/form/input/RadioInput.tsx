@@ -2,7 +2,7 @@
 
 import {
   UnstyledButton,
-  Checkbox,
+  Radio,
   Text,
   SimpleGrid,
   createStyles,
@@ -16,10 +16,7 @@ import useForm from "../../../hooks/useForm";
 
 // Types
 import { FormBuilder } from "../../../types/Form";
-import {
-  CheckboxInput as CheckboxInputType,
-  Option,
-} from "../../../types/FormType";
+import { Option, RadioInput as RadioInputType } from "../../../types/FormType";
 
 const useStyles = createStyles((theme, { checked }: { checked: boolean }) => ({
   button: {
@@ -59,18 +56,18 @@ interface ImageCheckboxProps {
   description: string;
 }
 
-export default function CheckboxInput({
+export default function RadioInput({
   renderElement,
   formKey,
   formBuilderSchema,
   basePath,
 }: {
-  renderElement: CheckboxInputType;
+  renderElement: RadioInputType;
   formKey: string;
   formBuilderSchema: FormBuilder;
   basePath: string;
 }) {
-  const { error, visible, inputState, captureCheckboxInputChange } = useForm({
+  const { error, visible, inputState, captureRadioInput } = useForm({
     formElement: renderElement,
     basePath,
     formKey,
@@ -78,7 +75,7 @@ export default function CheckboxInput({
   });
 
   // Checkbox
-  function CheckboxElement({
+  function RadioInputElement({
     title,
     description,
     className,
@@ -90,80 +87,12 @@ export default function CheckboxInput({
       React.ComponentPropsWithoutRef<"button">,
       keyof ImageCheckboxProps
     >) {
-    const check = (): boolean => {
-      if (!inputState) return false;
-      if (option.value) {
-        const inputStateObj: { [key: string]: boolean } = {};
-        inputState.forEach((input: string) => {
-          inputStateObj[input] = true;
-        });
-        let found: boolean = true;
-        for (let i = 0; i < option.value.length; i++) {
-          if (!inputStateObj[option.value[i] as string]) {
-            found = false;
-            break;
-          }
-        }
-
-        // Syncing with the state and the backend
-        if (!found && inputState.includes(option.key)) {
-          const newInputState = [...inputState];
-          const index = newInputState.indexOf(option.key);
-          if (index > -1) {
-            newInputState.splice(index, 1);
-          }
-          captureCheckboxInputChange(newInputState);
-        } else if (found && !inputState.includes(option.key)) {
-          captureCheckboxInputChange([...inputState, option.key]);
-        }
-        return found;
-      } else {
-        return inputState.includes(option.key) ? true : false;
-      }
-    };
-
     const { classes, cx } = useStyles({
-      checked: check(),
+      checked: inputState === option.key ? true : false,
     });
 
     const handleChange = () => {
-      if (option.value) {
-        if (inputState.includes(option.key)) {
-          // If the Option is not selected
-          const valueObj: { [key: string]: boolean } = {
-            [option.key as string]: true,
-          };
-          option.value.forEach((value: String) => {
-            valueObj[value as string] = true;
-          });
-          const newInputState: Array<string> = [];
-          inputState.forEach((input: string) => {
-            if (!valueObj[input]) newInputState.push(input);
-          });
-          captureCheckboxInputChange(newInputState as string[]);
-        } else {
-          // If Option is already Checked
-          const inputStateObj: { [key: string]: boolean } = {};
-          inputState.forEach((input: string) => {
-            inputStateObj[input] = true;
-          });
-          const newInputState = [...inputState, option.key];
-          option.value.forEach((optionValue) => {
-            if (!inputStateObj[optionValue as string])
-              newInputState.push(optionValue);
-          });
-          captureCheckboxInputChange(newInputState);
-        }
-      } else {
-        const newInputState = [...inputState];
-        const index = newInputState.indexOf(option.key);
-        if (index > -1) {
-          newInputState.splice(index, 1);
-        } else {
-          newInputState.push(option.key);
-        }
-        captureCheckboxInputChange(newInputState);
-      }
+      captureRadioInput(option.key as string);
     };
 
     return (
@@ -171,11 +100,11 @@ export default function CheckboxInput({
         onClick={handleChange}
         className={cx(classes.button, className)}
       >
-        <Checkbox
+        <Radio
           onChange={() => {}} // hack to shut error
-          checked={check()}
+          checked={inputState === option.key ? true : false}
           tabIndex={-1}
-          styles={{ input: { cursor: "pointer" } }}
+          // styles={{ input: { cursor: "pointer" } }}
         />
         <div className={classes.body}>
           <Typography weight={500} size="sm" sx={{ lineHeight: 1 }}>
@@ -209,7 +138,7 @@ export default function CheckboxInput({
         ]}
       >
         {renderElement.options.map((option, optionIndex) => (
-          <CheckboxElement
+          <RadioInputElement
             option={option}
             optionIndex={optionIndex}
             title={option.label as string}

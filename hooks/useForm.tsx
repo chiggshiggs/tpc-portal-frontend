@@ -179,6 +179,18 @@ function useForm({
     return value;
   };
 
+  const captureRadioInput = (input: string): string => {
+    dispatch(
+      updateFormStateContext({
+        formKey,
+        stateKey: basePath,
+        value: input,
+        formBuilderSchema,
+      })
+    );
+    return input;
+  };
+
   return {
     inputState: ReduxFormContext[formKey]?.keyStore[basePath],
     captureCheckboxInputChange,
@@ -190,6 +202,7 @@ function useForm({
     setBlur,
     keyDown,
     setKeyDown,
+    captureRadioInput,
   };
 }
 
