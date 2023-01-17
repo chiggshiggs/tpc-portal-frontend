@@ -37,7 +37,6 @@ function Renderer({
   initialSchema: FormBuilder;
 }): React.ReactElement {
   const dispatch = useDispatch();
-  console.log(renderElement);
   const addRepeatingSection = () => {
     dispatch(
       updateRepeatingSection({

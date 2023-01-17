@@ -21,17 +21,19 @@ import {
 import counterSlice from "./states/counterSlice.js";
 import userSlice from "./states/userSlice.js";
 import formSlice from "./states/formSlice";
+import themeSlice from "./states/themeSlice";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [],
+  whitelist: ["theme"],
 };
 
 const rootReducer = combineReducers({
   user: userSlice.reducer,
   counter: counterSlice.reducer,
   form: formSlice.reducer,
+  theme: themeSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

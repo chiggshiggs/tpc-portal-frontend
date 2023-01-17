@@ -8,6 +8,7 @@ import Logo from "./Logo";
 import { LinksGroup } from "./NavbarLinksGroup";
 import { UserButton } from "./UserButton";
 import DemoNavSchema from "../../demo/DemoNavSchema";
+import ThemeToggle from "../theme/ThemeToggle";
 
 export interface mockdata {
   label: String;
@@ -103,6 +104,7 @@ export function MobileDrawer({ children }: { children: React.ReactNode }) {
             onClick={() => setOpened((o) => !o)}
             title={title}
           />
+          <ThemeToggle />
         </Group>
         {children}
       </div>

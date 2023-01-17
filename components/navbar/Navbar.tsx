@@ -7,6 +7,7 @@ import { UserButton } from "./UserButton";
 import DemoNavSchema from "../../demo/DemoNavSchema";
 import React from "react";
 import { useSearchParams, usePathname } from "next/navigation";
+import ThemeToggle from "../theme/ThemeToggle";
 
 export interface mockdata {
   label: String;
@@ -84,7 +85,11 @@ export function NavbarNested({ children }: { children: React.ReactNode }) {
           />
         </Navbar.Section>
       </Navbar>
-      <div className="flex w-full h-[100vh] overflow-scroll p-5">
+      <div className="flex-col w-full h-[100vh] overflow-scroll p-5">
+        <div className="flex justify-between">
+          <div></div>
+          <ThemeToggle />
+        </div>
         {children}
       </div>
     </div>

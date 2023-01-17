@@ -19,7 +19,9 @@ export default function RootLayout({
         <ReduxProvider>
           <RootStyleRegistry>
             <div className="sm:hidden">
-              <MobileDrawer>{children}</MobileDrawer>
+              <MobileDrawer>
+                <div>{children}</div>
+              </MobileDrawer>
             </div>
             <div className=" hidden sm:block">
               <NavbarNested>{children}</NavbarNested>

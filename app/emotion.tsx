@@ -4,6 +4,8 @@ import { useEmotionCache, MantineProvider } from "@mantine/core";
 import { useServerInsertedHTML } from "next/navigation";
 
 import { ThemeProvider } from "@material-tailwind/react";
+import { useSelector } from "react-redux";
+import { selectTheme, Theme } from "../store/states/themeSlice";
 
 export default function RootStyleRegistry({
   children,
@@ -12,6 +14,8 @@ export default function RootStyleRegistry({
 }) {
   const cache = useEmotionCache();
   cache.compat = true;
+
+  const { theme } = useSelector(selectTheme);
 
   useServerInsertedHTML(() => (
     <style
@@ -31,7 +35,7 @@ export default function RootStyleRegistry({
           fontFamily: "Verdana, sans-serif",
           fontFamilyMonospace: "Monaco, Courier, monospace",
           headings: { fontFamily: "Greycliff CF, sans-serif" },
-          // colorScheme:"dark"
+          colorScheme: theme == Theme.DARK ? "dark" : "light",
         }}
       >
         <ThemeProvider>{children}</ThemeProvider>
