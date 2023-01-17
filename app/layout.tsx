@@ -7,6 +7,10 @@ import ReduxProvider from "./redux";
 
 import "./globals.css";
 
+export const config = {
+  runtime: "experimental-edge",
+};
+
 export default function RootLayout({
   children,
 }: {
