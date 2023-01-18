@@ -73,6 +73,7 @@ export interface FormState {
   keyStore: KeyStore;
   formBuilderSchema: FormBuilder;
   validationStore: ValidationStore;
+  submitTried: boolean;
 }
 
 export interface ExportableFormState {

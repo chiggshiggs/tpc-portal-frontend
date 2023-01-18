@@ -89,34 +89,39 @@ export default function RadioInput({
   }
 
   return (
-    <div className="mt-3 mb-3">
-      <Input.Label
-        className="font-bold"
-        required={(renderElement.required as boolean) || false}
-      >
-        {renderElement.label}
-      </Input.Label>
-      <Input.Description>{renderElement.description}</Input.Description>
-      <SimpleGrid
-        cols={4}
-        className="mt-1"
-        breakpoints={[
-          { maxWidth: "xl", cols: 4 },
-          { maxWidth: "lg", cols: 3 },
-          { maxWidth: "md", cols: 2 },
-          { maxWidth: "xs", cols: 1 },
-        ]}
-      >
-        {renderElement.options.map((option, optionIndex) => (
-          <RadioInputElement
-            option={option}
-            optionIndex={optionIndex}
-            title={option.label as string}
-            description={(option.description as string) || ""}
-            key={option.key as React.Key}
-          />
-        ))}
-      </SimpleGrid>
+    <div>
+      {visible && (
+        <div className="mt-3 mb-3">
+          <Input.Label
+            className="font-bold"
+            required={(renderElement.required as boolean) || false}
+          >
+            {renderElement.label}
+          </Input.Label>
+          <Input.Description>{renderElement.description}</Input.Description>
+          <SimpleGrid
+            cols={4}
+            className="mt-1"
+            breakpoints={[
+              { maxWidth: "xl", cols: 4 },
+              { maxWidth: "lg", cols: 3 },
+              { maxWidth: "md", cols: 2 },
+              { maxWidth: "xs", cols: 1 },
+            ]}
+          >
+            {renderElement.options.map((option, optionIndex) => (
+              <RadioInputElement
+                option={option}
+                optionIndex={optionIndex}
+                title={option.label as string}
+                description={(option.description as string) || ""}
+                key={option.key as React.Key}
+              />
+            ))}
+          </SimpleGrid>
+          <Input.Error className="mt-1">{error}</Input.Error>
+        </div>
+      )}
     </div>
   );
 }

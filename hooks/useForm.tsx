@@ -64,6 +64,7 @@ function useForm({
         );
     }
 
+    // Updating the Validation state
     dispatch(
       updateFormValidationContext({
         formKey,
@@ -92,7 +93,7 @@ function useForm({
   useEffect(() => {
     if (formElement.type === FormInputType.FILE) return;
     const inputState = ReduxFormContext[formKey]?.keyStore[basePath];
-    if (!keyDown && !blur) return;
+    if (!ReduxFormContext[formKey]?.submitTried && !keyDown && !blur) return;
 
     let finalValidatedState: boolean = true;
 
@@ -102,8 +103,10 @@ function useForm({
       vs.isRequired(inputState).validationStatus === Validation.FAILURE
     ) {
       finalValidatedState = false;
+      console.log(inputState, basePath);
       setError("This field is required");
     } else {
+      setError("");
       if (!formElement.validation) return;
       let populateValues: Array<String> = populate(
         formElement.validation.props as Array<string>

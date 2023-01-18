@@ -63,6 +63,7 @@ export const formSlice = createSlice({
           keyStore: {},
           validationStore: {},
           formBuilderSchema: action.payload.formBuilderSchema,
+          submitTried: false,
         };
     },
 
@@ -75,6 +76,7 @@ export const formSlice = createSlice({
           keyStore: {},
           validationStore: {},
           formBuilderSchema: action.payload.formBuilderSchema,
+          submitTried: false,
         };
       state[action.payload.formKey].keyStore[action.payload.stateKey] =
         action.payload.value || "";
@@ -89,6 +91,7 @@ export const formSlice = createSlice({
           keyStore: {},
           validationStore: {},
           formBuilderSchema: action.payload.formBuilderSchema,
+          submitTried: false,
         };
       state[action.payload.formKey].validationStore[action.payload.stateKey] =
         action.payload.value || false;
@@ -122,6 +125,10 @@ export const formSlice = createSlice({
         0
       );
     },
+
+    trySubmit: (state, action: PayloadAction<{ formKey: string }>) => {
+      state[action.payload.formKey].submitTried = true;
+    },
   },
 });
 
@@ -131,6 +138,7 @@ export const {
   updateFormValidationContext,
   updateRepeatingSection,
   removeRepeatingSection,
+  trySubmit,
 } = formSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

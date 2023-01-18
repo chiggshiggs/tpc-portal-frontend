@@ -13,7 +13,11 @@ const Renderer = dynamic(import("./Renderer"));
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-import { initializeFormState, selectForm } from "../../store/states/formSlice";
+import {
+  initializeFormState,
+  selectForm,
+  trySubmit,
+} from "../../store/states/formSlice";
 import { FormElement } from "../../types/FormType";
 import useExportableFormData from "../../hooks/useExportableFormData";
 
@@ -23,7 +27,8 @@ function Form({ schema }: { schema: FormBuilder }) {
     formKey: schema.key as string,
   });
 
-  console.log(exportableFormState);
+  console.log(formState);
+
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -34,6 +39,10 @@ function Form({ schema }: { schema: FormBuilder }) {
       })
     );
   }, []);
+
+  const handleSubmit = () => {
+    dispatch(trySubmit({ formKey: schema.key as string }));
+  };
 
   return (
     <div>
@@ -63,6 +72,7 @@ function Form({ schema }: { schema: FormBuilder }) {
         className="mt-4"
         ripple={true}
         aria-hidden={true}
+        onClick={handleSubmit}
         variant="gradient"
       >
         SUBMIT

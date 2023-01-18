@@ -56,6 +56,7 @@ const DemoSchema: FormBuilder = {
           label: "Gender",
           key: "gender",
           type: FormInputType.RADIO,
+          required: true,
           description: "Choose your gender",
           options: [
             {
@@ -126,7 +127,8 @@ const DemoSchema: FormBuilder = {
       key: "preferredBranch",
       type: FormInputType.CHECKBOX,
       description: "Choose your preferred branch",
-      initialValue: ["ece", "cse"],
+      required: true,
+      // initialValue: ["ece", "cse"],
       options: [
         {
           label: "circuital",
