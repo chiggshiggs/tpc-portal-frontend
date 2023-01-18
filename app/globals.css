@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.mantine-Drawer-body{
-    height: 100%;
+.mantine-Drawer-body {
+  height: 100%;
 }

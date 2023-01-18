@@ -11,7 +11,7 @@ module.exports = withMT({
   ],
   theme: {
     extend: {},
-    screens:{}
+    screens: {},
   },
   plugins: [],
 });
