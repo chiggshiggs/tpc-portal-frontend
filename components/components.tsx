@@ -7,6 +7,8 @@ import {
   Title as Typography,
   Input,
   Textarea,
+  NumberInputHandlers,
+  ActionIcon,
   Center,
   useMantineColorScheme,
   NumberInput,
@@ -27,7 +29,7 @@ import {
   Checkbox,
   Radio,
   Drawer,
-  useMantineTheme
+  useMantineTheme,
 } from "@mantine/core";
 
 // Switching to Material Tailwind if Mantine is not good
@@ -45,6 +47,7 @@ export {
   useMantineTheme,
   Textarea,
   NumberInput,
+  ActionIcon,
   Center,
   useMantineColorScheme,
   Group,
@@ -65,4 +68,4 @@ export {
   Radio,
 };
 
-export type { UnstyledButtonProps };
+export type { UnstyledButtonProps, NumberInputHandlers };

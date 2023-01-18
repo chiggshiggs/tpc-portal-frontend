@@ -57,6 +57,8 @@ export interface NumberInput {
   id?: String;
   description?: String;
   initialValue?: number;
+  min?: number;
+  max?: number;
 }
 
 export interface FileInput {
