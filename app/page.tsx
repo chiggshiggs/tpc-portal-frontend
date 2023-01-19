@@ -8,8 +8,10 @@ const Form = dynamic(() => import("../components/form/Form"), {
 
 export default function Home() {
   return (
-    <main className="w-full">
-      <Form schema={DemoSchema} />
+    <main>
+      <div className="max-w-[800px] m-auto">
+        <Form schema={DemoSchema} />
+      </div>
     </main>
   );
 }

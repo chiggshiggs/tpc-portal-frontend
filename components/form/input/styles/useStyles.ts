@@ -13,7 +13,7 @@ export const useStyles = createStyles(
               .border
           : theme.colorScheme === "dark"
           ? theme.colors.dark[3]
-          : theme.colors.gray[3]
+          : theme.colors.gray[4]
       }`,
       // border: "1px solid white",
       borderRadius: theme.radius.sm,

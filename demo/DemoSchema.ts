@@ -24,7 +24,7 @@ const DemoSchema: FormBuilder = {
           key: "middleName",
           type: FormInputType.SHORT_TEXT,
           visible: {
-            props: ["[personalInfo]-(0)-[firstName]"],
+            props: ["[personalInfo]-[firstName]"],
             validator: (propsList: Array<string>) => {
               const firstName = propsList[0];
               return firstName && firstName.length ? true : false;
@@ -37,8 +37,8 @@ const DemoSchema: FormBuilder = {
           type: FormInputType.SHORT_TEXT,
           visible: {
             props: [
-              "[personalInfo]-(0)-[firstName]",
-              "[personalInfo]-(0)-[middleName]",
+              "[personalInfo]-[firstName]",
+              "[personalInfo]-[middleName]",
             ],
             validator: (propsList: Array<string>) => {
               const firstName = propsList[0];
@@ -156,6 +156,13 @@ const DemoSchema: FormBuilder = {
           key: "phe",
         },
       ],
+    },
+    {
+      label: "CTC",
+      key: "ctc",
+      required: true,
+      type: FormInputType.CURRENCY,
+      description: "Enter the first year CTC",
     },
   ],
 };

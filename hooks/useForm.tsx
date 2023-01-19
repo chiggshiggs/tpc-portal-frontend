@@ -53,6 +53,23 @@ function useForm({
           })
         );
         break;
+
+      // For currency we need to concat the currency and the value for initial value
+      case FormInputType.CURRENCY:
+        let currencyValue = "INR";
+        if (formElement.initialValue)
+          currencyValue =
+            formElement.initialValue.currency + formElement.initialValue.value;
+        dispatch(
+          updateFormStateContext({
+            formKey,
+            stateKey: basePath,
+            value: currencyValue,
+            formBuilderSchema,
+          })
+        );
+        break;
+
       default:
         dispatch(
           updateFormStateContext({
@@ -100,7 +117,8 @@ function useForm({
     // Generic Required Validation
     if (
       formElement.required &&
-      vs.isRequired(inputState).validationStatus === Validation.FAILURE
+      vs.isRequired(inputState, formElement.type).validationStatus ===
+        Validation.FAILURE
     ) {
       finalValidatedState = false;
       console.log(inputState, basePath);
@@ -170,6 +188,18 @@ function useForm({
     return value;
   };
 
+  const captureCurrencyInputChange = (value: string): string => {
+    dispatch(
+      updateFormStateContext({
+        formKey,
+        stateKey: basePath,
+        value,
+        formBuilderSchema,
+      })
+    );
+    return value;
+  };
+
   const captureCheckboxInputChange = (value: Array<string>): Array<string> => {
     dispatch(
       updateFormStateContext({
@@ -206,6 +236,7 @@ function useForm({
     keyDown,
     setKeyDown,
     captureRadioInput,
+    captureCurrencyInputChange,
   };
 }
 

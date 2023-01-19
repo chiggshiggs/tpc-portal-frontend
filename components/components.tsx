@@ -3,6 +3,7 @@
 // Converting Mantine to Client Components
 import {
   Switch,
+  Select,
   TextInput,
   Title as Typography,
   Input,
@@ -28,6 +29,7 @@ import {
   Burger,
   Checkbox,
   Radio,
+  SelectProps,
   Drawer,
   useMantineTheme,
 } from "@mantine/core";
@@ -43,6 +45,7 @@ export {
   Checkbox,
   Button,
   SimpleGrid,
+  Select,
   Input,
   useMantineTheme,
   Textarea,
@@ -68,4 +71,4 @@ export {
   Radio,
 };
 
-export type { UnstyledButtonProps, NumberInputHandlers };
+export type { UnstyledButtonProps, NumberInputHandlers, SelectProps };

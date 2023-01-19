@@ -13,13 +13,14 @@ import {
 import { FormBuilder, RepeatableSection, Section } from "../../types/Form";
 import { FormType, FormElement, FormInputType } from "../../types/FormType";
 import { Button, Typography } from "../components";
-import CheckboxInput from "./input/Checkbox";
-import RadioInput from "./input/RadioInput";
 
 // Components
 const ShortText = dynamic(import("./input/ShortText"));
 const LongText = dynamic(import("./input/LongText"));
 const NumberInput = dynamic(import("./input/NumberInput"));
+const RadioInput = dynamic(import("./input/RadioInput"));
+const CurrencyInput = dynamic(import("./input/CurrencyInput"));
+const CheckboxInput = dynamic(import("./input/Checkbox"));
 
 function Renderer({
   renderElement,
@@ -207,6 +208,16 @@ function Renderer({
       case FormInputType.RADIO:
         return (
           <RadioInput
+            renderElement={renderElement}
+            formKey={formKey}
+            basePath={`${basePath}[${renderElement.key}]`}
+            formBuilderSchema={formBuilderSchema}
+          />
+        );
+
+      case FormInputType.CURRENCY:
+        return (
+          <CurrencyInput
             renderElement={renderElement}
             formKey={formKey}
             basePath={`${basePath}[${renderElement.key}]`}

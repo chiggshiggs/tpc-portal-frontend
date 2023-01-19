@@ -1,4 +1,5 @@
 import { Failure, Success } from "../types/Form";
+import { FormInputType, FormType } from "../types/FormType";
 import { Validation } from "../types/Validation";
 
 export default class ValidationService {
@@ -7,7 +8,8 @@ export default class ValidationService {
   }
 
   isRequired(
-    input: string | number | Array<string> | Array<number> | undefined | null
+    input: string | number | Array<string> | Array<number> | undefined | null,
+    formInputType: FormInputType
   ): Success | Failure {
     const error: Failure = {
       validationStatus: Validation.FAILURE,
@@ -16,8 +18,17 @@ export default class ValidationService {
     const validated: Success = {
       validationStatus: Validation.SUCCESS,
     };
-    if (typeof input === "number") return validated;
-    if (!input) return error;
-    return input.length ? validated : error;
+    let inputState = input;
+
+    if (formInputType === FormInputType.CURRENCY && typeof input === "string")
+      inputState = input
+        ? input.split(" ").length > 1
+          ? input.split(" ")[1]
+          : ""
+        : "";
+
+    if (typeof inputState === "number") return validated;
+    if (!inputState) return error;
+    return inputState.length ? validated : error;
   }
 }

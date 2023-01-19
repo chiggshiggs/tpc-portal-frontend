@@ -1,3 +1,4 @@
+import { Currency } from "./CurrencyTypes";
 import { Validation, Visible } from "./Form";
 
 export enum FormType {
@@ -13,6 +14,7 @@ export enum FormInputType {
   FILE = "FILE",
   NUMBER = "NUMBER",
   CHIPBOX = "CHIPBOX",
+  CURRENCY = "CURRENCY",
 }
 
 export enum InputType {
@@ -110,10 +112,28 @@ export interface Option {
   description?: String;
 }
 
+export interface CurrencyInput {
+  label: String;
+  key: String;
+  type: FormInputType.CURRENCY;
+  required?: Boolean;
+  validation?: Validation;
+  visible?: Visible;
+  defaultCurrency?: Currency;
+  placeHolder?: String;
+  id?: String;
+  description?: String;
+  initialValue?: {
+    currency: Currency;
+    value: number;
+  };
+}
+
 export type FormElement =
   | ShortText
   | LongText
   | NumberInput
   | FileInput
   | RadioInput
-  | CheckboxInput;
+  | CheckboxInput
+  | CurrencyInput;
