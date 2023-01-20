@@ -21,6 +21,7 @@ const NumberInput = dynamic(import("./input/NumberInput"));
 const RadioInput = dynamic(import("./input/RadioInput"));
 const CurrencyInput = dynamic(import("./input/CurrencyInput"));
 const CheckboxInput = dynamic(import("./input/Checkbox"));
+const FileInput = dynamic(import("./input/FileInput"));
 
 function Renderer({
   renderElement,
@@ -218,6 +219,16 @@ function Renderer({
       case FormInputType.CURRENCY:
         return (
           <CurrencyInput
+            renderElement={renderElement}
+            formKey={formKey}
+            basePath={`${basePath}[${renderElement.key}]`}
+            formBuilderSchema={formBuilderSchema}
+          />
+        );
+
+      case FormInputType.FILE:
+        return (
+          <FileInput
             renderElement={renderElement}
             formKey={formKey}
             basePath={`${basePath}[${renderElement.key}]`}

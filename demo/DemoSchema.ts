@@ -164,6 +164,13 @@ const DemoSchema: FormBuilder = {
       type: FormInputType.CURRENCY,
       description: "Enter the first year CTC",
     },
+    {
+      label: "Job Description",
+      key: "jd",
+      required: true,
+      type: FormInputType.FILE,
+      description: "Attach the JD related to the profile",
+    },
   ],
 };
 

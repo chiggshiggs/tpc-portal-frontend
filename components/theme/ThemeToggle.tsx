@@ -12,7 +12,6 @@ function ThemeToggle() {
   const dispatch = useDispatch();
   const ThemeContext = useSelector(selectTheme);
   const theme = useMantineTheme();
-  console.log(ThemeContext);
   return (
     <div>
       <Group position="center">

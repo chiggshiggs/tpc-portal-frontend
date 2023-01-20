@@ -70,6 +70,16 @@ function useForm({
         );
         break;
 
+      case FormInputType.FILE:
+        dispatch(
+          updateFormStateContext({
+            formKey,
+            stateKey: basePath,
+            value: [],
+            formBuilderSchema,
+          })
+        );
+
       default:
         dispatch(
           updateFormStateContext({
@@ -108,7 +118,6 @@ function useForm({
 
   // Validate
   useEffect(() => {
-    if (formElement.type === FormInputType.FILE) return;
     const inputState = ReduxFormContext[formKey]?.keyStore[basePath];
     if (!ReduxFormContext[formKey]?.submitTried && !keyDown && !blur) return;
 
@@ -121,10 +130,10 @@ function useForm({
         Validation.FAILURE
     ) {
       finalValidatedState = false;
-      console.log(inputState, basePath);
       setError("This field is required");
     } else {
       setError("");
+      if (formElement.type === FormInputType.FILE) return;
       if (!formElement.validation) return;
       let populateValues: Array<String> = populate(
         formElement.validation.props as Array<string>
@@ -224,6 +233,18 @@ function useForm({
     return input;
   };
 
+  const captureFileInputChange = (input: Array<File>): Array<File> => {
+    dispatch(
+      updateFormStateContext({
+        formKey,
+        stateKey: basePath,
+        value: input,
+        formBuilderSchema,
+      })
+    );
+    return input;
+  };
+
   return {
     inputState: ReduxFormContext[formKey]?.keyStore[basePath],
     captureCheckboxInputChange,
@@ -237,6 +258,7 @@ function useForm({
     setKeyDown,
     captureRadioInput,
     captureCurrencyInputChange,
+    captureFileInputChange,
   };
 }
 

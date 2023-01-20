@@ -107,7 +107,6 @@ function CurrencyInput({
           defaultValue={renderElement.initialValue?.currency || "INR"}
           nothingFound="Nothing found"
           filter={(value, item) => {
-            console.log(item, value);
             return item.label
               ?.toLowerCase()
               .includes(value.toLowerCase().trim())

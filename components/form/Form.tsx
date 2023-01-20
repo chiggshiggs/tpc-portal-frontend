@@ -27,6 +27,8 @@ function Form({ schema }: { schema: FormBuilder }) {
     formKey: schema.key as string,
   });
 
+  console.log(formState, exportableFormState);
+
   const dispatch = useDispatch();
 
   React.useEffect(() => {

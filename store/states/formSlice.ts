@@ -15,7 +15,7 @@ export interface UpdateReduxFormState {
   formKey: string;
   stateKey: string;
   formBuilderSchema: FormBuilder;
-  value?: string | Array<string> | number | Array<number>;
+  value?: string | Array<string> | number | Array<number> | Array<File>;
 }
 
 export interface UpdateReduxFormValidation {

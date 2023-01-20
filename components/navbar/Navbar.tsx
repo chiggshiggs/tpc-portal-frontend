@@ -17,10 +17,12 @@ export interface mockdata {
   initiallyopened: boolean;
   links: Array<{} | {} | {}>;
 }
+
 const useStyles = createStyles((theme) => ({
   navbar: {
     backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
+      theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.fn.gradient(),
+    // backgroundImage: theme.fn.gradient(),
     paddingBotton: 0,
   },
   header: {
@@ -34,6 +36,8 @@ const useStyles = createStyles((theme) => ({
     }`,
   },
   links: {
+    color: theme.colorScheme === "dark" ? theme.white : theme.white,
+
     marginLeft: -theme.spacing.md,
     marginRight: -theme.spacing.md,
   },
@@ -42,6 +46,7 @@ const useStyles = createStyles((theme) => ({
     paddingBottom: theme.spacing.md,
   },
   footer: {
+    color: theme.colorScheme === "dark" ? theme.white : theme.black,
     marginLeft: -theme.spacing.md,
     marginRight: -theme.spacing.md,
     borderTop: `1px solid ${
@@ -62,7 +67,7 @@ export function NavbarNested({
 
   return (
     <div className="flex">
-      <Navbar className="h-[100vh]" p="xs" width={{ base: 300 }}>
+      <Navbar className={`${classes.navbar}`} p="xs" width={{ base: 300 }}>
         <Navbar.Section className={classes.header}>
           {/* Header with logo */}
           <Group position="apart">

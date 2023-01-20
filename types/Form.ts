@@ -52,7 +52,7 @@ export interface FormBuilder {
 // ----------------- Form State -----------------
 
 export interface KeyStore {
-  [key: string]: string | number | Array<string> | Array<number>;
+  [key: string]: string | number | Array<string> | Array<number> | Array<File>;
 }
 
 export interface ValidationStore {

@@ -70,7 +70,7 @@ export interface FileInput {
   required?: Boolean;
   visible?: Visible;
   description?: String;
-  initialValue?: File | Array<File>;
+  initialValue?: Array<File>;
 }
 
 // -------------------- Radio ----------------- //

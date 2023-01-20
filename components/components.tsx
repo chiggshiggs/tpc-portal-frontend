@@ -4,6 +4,7 @@
 import {
   Switch,
   Select,
+  Paper,
   TextInput,
   Title as Typography,
   Input,
@@ -34,6 +35,13 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 
+import {
+  Dropzone,
+  DropzoneProps,
+  MIME_TYPES,
+  FileWithPath,
+} from "@mantine/dropzone";
+
 // Switching to Material Tailwind if Mantine is not good
 import { Button } from "@material-tailwind/react";
 import { MantineLogo } from "@mantine/ds";
@@ -42,6 +50,8 @@ export {
   Switch,
   TextInput,
   Typography,
+  MIME_TYPES,
+  Dropzone,
   Checkbox,
   Button,
   SimpleGrid,
@@ -50,6 +60,7 @@ export {
   useMantineTheme,
   Textarea,
   NumberInput,
+  Paper,
   ActionIcon,
   Center,
   useMantineColorScheme,
@@ -71,4 +82,10 @@ export {
   Radio,
 };
 
-export type { UnstyledButtonProps, NumberInputHandlers, SelectProps };
+export type {
+  UnstyledButtonProps,
+  NumberInputHandlers,
+  SelectProps,
+  DropzoneProps,
+  FileWithPath,
+};
