@@ -33,23 +33,32 @@ function useExportableFormData({ formKey }: { formKey: string }) {
 
     formStateSnapshot.forEach((element) => {
       exportData[element.key as string] = {};
-      FS.recursiveExporter(
-        keyStoreSnapshot,
-        element,
-        exportData,
-        "",
-        exportData
-      );
+      FS.recursiveExporter(keyStoreSnapshot, element, exportData, "");
     });
 
     setExportableFormState(exportData);
+  };
+
+  const exportableFormView = () => {
+    let exportData: ExportableFormState = {};
+    if (!FormContext[formKey]) return;
+    const keyStoreSnapshot: KeyStore = { ...FormContext[formKey].keyStore };
+    const formStateSnapshot: Array<Section | RepeatableSection | FormElement> =
+      [...FormContext[formKey].formBuilderSchema.sections];
+
+    formStateSnapshot.forEach((element) => {
+      exportData[element.key as string] = {};
+      FS.recursiveViewConverter(keyStoreSnapshot, element, exportData, "");
+    });
+
+    return exportData;
   };
 
   React.useEffect(() => {
     exportFormData();
   }, [FormContext[formKey]]);
 
-  return { exportableFormState };
+  return { exportableFormState, exportableFormView };
 }
 
 export default useExportableFormData;

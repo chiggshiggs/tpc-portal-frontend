@@ -27,6 +27,7 @@ export type Section = {
   key: String;
   type: FormType.SECTION;
   title?: String;
+  description?: String;
   validation?: Validation;
   visible?: Visible;
 };
@@ -37,6 +38,7 @@ export interface RepeatableSection {
   type: FormType.REPEATABLE_SECTION;
   title?: String;
   validation?: Validation;
+  description?: String;
   visible?: Visible;
   addElementText?: String;
   repeatSectionHeading?: String;

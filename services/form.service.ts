@@ -251,8 +251,7 @@ export default class FormService {
       | Array<string>
       | ExportableFormState
       | Array<ExportableFormState>,
-    basePath: string,
-    exportableFormData2: any
+    basePath: string
   ) {
     // Checking if is a FormElement  -> If this is true then it is a formElement
     if (
@@ -269,8 +268,7 @@ export default class FormService {
                 keyStore,
                 element,
                 exportableFormData[formState.key as string],
-                `${basePath}[${formState.key}]-`,
-                exportableFormData2
+                `${basePath}[${formState.key}]-`
               );
             }
           );
@@ -298,8 +296,7 @@ export default class FormService {
                         exportableFormData[formState.key as string][
                           sectionIndex
                         ],
-                        `${basePath}[${formState.key}]-(${sectionIndex})-`,
-                        exportableFormData2
+                        `${basePath}[${formState.key}]-(${sectionIndex})-`
                       );
                   }
                 );
@@ -312,6 +309,86 @@ export default class FormService {
         default: {
           const newBasePath = `${basePath}[${formState.key}]`;
           exportableFormData[formState.key as string] = keyStore[newBasePath];
+        }
+      }
+    }
+  }
+
+  recursiveViewConverter(
+    keyStore: KeyStore,
+    formState:
+      | Array<Section | RepeatableSection | FormElement>
+      | Section
+      | RepeatableSection
+      | FormElement,
+    exportableFormData:
+      | string
+      | number
+      | Array<File>
+      | Array<number>
+      | Array<string>
+      | ExportableFormState
+      | Array<ExportableFormState>,
+    basePath: string
+  ) {
+    // Checking if is a FormElement  -> If this is true then it is a formElement
+    if (
+      !Array.isArray(formState) &&
+      typeof exportableFormData === "object" &&
+      !Array.isArray(exportableFormData)
+    ) {
+      switch (formState.type) {
+        case FormType.SECTION:
+          exportableFormData[formState.title as string] = {};
+          formState.formElements.forEach(
+            (element: FormElement | Section | RepeatableSection) => {
+              this.recursiveViewConverter(
+                keyStore,
+                element,
+                exportableFormData[formState.title as string],
+                `${basePath}[${formState.key}]-`
+              );
+            }
+          );
+          break;
+
+        case FormType.REPEATABLE_SECTION: {
+          exportableFormData[formState.title as string] = [];
+          formState.formElements.map(
+            (
+              section: Array<FormElement | Section | RepeatableSection>,
+              sectionIndex: number
+            ) => {
+              if (Array.isArray(exportableFormData[formState.key as string])) {
+                // @ts-ignore
+                exportableFormData[formState.label as string].push({});
+                section.forEach(
+                  (element: FormElement | Section | RepeatableSection) => {
+                    if (
+                      Array.isArray(
+                        exportableFormData[formState.title as string]
+                      )
+                    )
+                      this.recursiveViewConverter(
+                        keyStore,
+                        element,
+                        // @ts-ignore
+                        exportableFormData[formState.label as string][
+                          sectionIndex
+                        ],
+                        `${basePath}[${formState.key}]-(${sectionIndex})-`
+                      );
+                  }
+                );
+              }
+            }
+          );
+          break;
+        }
+
+        default: {
+          const newBasePath = `${basePath}[${formState.key}]`;
+          exportableFormData[formState.label as string] = keyStore[newBasePath];
         }
       }
     }

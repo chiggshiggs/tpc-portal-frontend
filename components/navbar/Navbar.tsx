@@ -21,9 +21,9 @@ export interface mockdata {
 const useStyles = createStyles((theme) => ({
   navbar: {
     backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.fn.gradient(),
+      theme.colorScheme === "dark" ? theme.colors.dark[9] : "white",
     // backgroundImage: theme.fn.gradient(),
-    paddingBotton: 0,
+    paddingBottom: 0,
   },
   header: {
     padding: theme.spacing.md,
@@ -36,8 +36,6 @@ const useStyles = createStyles((theme) => ({
     }`,
   },
   links: {
-    color: theme.colorScheme === "dark" ? theme.white : theme.white,
-
     marginLeft: -theme.spacing.md,
     marginRight: -theme.spacing.md,
   },
