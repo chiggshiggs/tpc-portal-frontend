@@ -37,7 +37,7 @@ function Form({
   successDescription?: string;
 }) {
   const formState = useSelector(selectForm);
-  const { exportableFormState } = useExportableFormData({
+  const { exportableFormState, checkValidated } = useExportableFormData({
     formKey: schema.key as string,
   });
   const theme = useMantineTheme();
@@ -55,6 +55,11 @@ function Form({
       })
     );
   }, []);
+
+  const handleSubmit = () => {
+    if (step === 1) dispatch(trySubmit({ formKey: schema.key as string }));
+    if (checkValidated()) setStep(step + 1);
+  };
 
   return (
     <div>
@@ -136,9 +141,7 @@ function Form({
             className="mt-4"
             ripple={true}
             aria-hidden={true}
-            onClick={() => {
-              setStep(step + 1);
-            }}
+            onClick={handleSubmit}
             variant="gradient"
           >
             {step < 2 ? "NEXT" : "SUBMIT"}

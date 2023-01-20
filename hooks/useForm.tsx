@@ -41,7 +41,16 @@ function useForm({
 
   // Initialize Key Value and Validation
   useEffect(() => {
-    // if (!ReduxFormContext[formKey].keyStore[basePath])
+    // If value already exists in KeyStore then just skip this step
+    if (
+      vs.isRequired(
+        ReduxFormContext[formKey].keyStore[basePath],
+        formElement.type
+      ).validationStatus === Validation.SUCCESS
+    ) {
+      return;
+    }
+
     switch (formElement.type) {
       case FormInputType.CHECKBOX:
         dispatch(
@@ -133,21 +142,22 @@ function useForm({
       setError("This field is required");
     } else {
       setError("");
-      if (formElement.type === FormInputType.FILE) return;
-      if (!formElement.validation) return;
-      let populateValues: Array<String> = populate(
-        formElement.validation.props as Array<string>
-      );
+      finalValidatedState = true;
+      if (formElement.type !== FormInputType.FILE && formElement.validation) {
+        let populateValues: Array<String> = populate(
+          formElement.validation.props as Array<string>
+        );
 
-      let state: Success | Failure | undefined =
-        formElement.validation?.validator(populateValues);
-      setError(
-        (state?.validationStatus == Validation.SUCCESS
-          ? ""
-          : state?.errorMessage) || ""
-      );
-      if (state?.validationStatus == Validation.FAILURE)
-        finalValidatedState = false;
+        let state: Success | Failure | undefined =
+          formElement.validation?.validator(populateValues);
+        setError(
+          (state?.validationStatus == Validation.SUCCESS
+            ? ""
+            : state?.errorMessage) || ""
+        );
+        if (state?.validationStatus == Validation.FAILURE)
+          finalValidatedState = false;
+      }
     }
 
     // Update the validation Status on validation Store

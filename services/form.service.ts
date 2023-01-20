@@ -359,9 +359,11 @@ export default class FormService {
               section: Array<FormElement | Section | RepeatableSection>,
               sectionIndex: number
             ) => {
-              if (Array.isArray(exportableFormData[formState.key as string])) {
+              if (
+                Array.isArray(exportableFormData[formState.title as string])
+              ) {
                 // @ts-ignore
-                exportableFormData[formState.label as string].push({});
+                exportableFormData[formState.title as string].push({});
                 section.forEach(
                   (element: FormElement | Section | RepeatableSection) => {
                     if (
@@ -373,7 +375,7 @@ export default class FormService {
                         keyStore,
                         element,
                         // @ts-ignore
-                        exportableFormData[formState.label as string][
+                        exportableFormData[formState.title as string][
                           sectionIndex
                         ],
                         `${basePath}[${formState.key}]-(${sectionIndex})-`

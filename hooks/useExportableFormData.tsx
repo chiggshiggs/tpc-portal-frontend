@@ -14,6 +14,7 @@ import {
   KeyStore,
   RepeatableSection,
   Section,
+  ValidationStore,
 } from "../types/Form";
 import { FormElement } from "../types/FormType";
 
@@ -39,6 +40,20 @@ function useExportableFormData({ formKey }: { formKey: string }) {
     setExportableFormState(exportData);
   };
 
+  const checkValidated = (): boolean => {
+    const validationStore: ValidationStore =
+      FormContext[formKey].validationStore;
+    let valid = true;
+    for (let key in validationStore) {
+      if (!validationStore[key]) {
+        valid = false;
+        break;
+      }
+    }
+
+    return valid;
+  };
+
   const exportableFormView = () => {
     let exportData: ExportableFormState = {};
     if (!FormContext[formKey]) return;
@@ -58,7 +73,7 @@ function useExportableFormData({ formKey }: { formKey: string }) {
     exportFormData();
   }, [FormContext[formKey]]);
 
-  return { exportableFormState, exportableFormView };
+  return { exportableFormState, exportableFormView, checkValidated };
 }
 
 export default useExportableFormData;
