@@ -80,6 +80,7 @@ export interface ExportableFormState {
   [key: string]:
     | string
     | number
+    | Array<File>
     | Array<string>
     | Array<number>
     | ExportableFormState

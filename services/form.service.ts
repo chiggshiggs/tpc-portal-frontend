@@ -246,6 +246,7 @@ export default class FormService {
     exportableFormData:
       | string
       | number
+      | Array<File>
       | Array<number>
       | Array<string>
       | ExportableFormState
